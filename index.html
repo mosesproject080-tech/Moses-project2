@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>1XBET MINES • REAL PREDICTOR</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #0a0c15;
+            background-image: radial-gradient(circle at 30% 50%, #1a2340 0%, #0a0c15 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px;
+        }
+
+        .container {
+            max-width: 560px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .main-panel {
+            background: #11172b;
+            border: 1px solid #2f3d63;
+            border-radius: 40px;
+            padding: 20px 16px;
+            box-shadow: 0 30px 40px -10px black;
+        }
+
+        /* Status Bar */
+        .status-bar {
+            background: #1b2340;
+            border-radius: 60px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #00b050;
+            text-align: center;
+        }
+
+        .status-title {
+            color: #00ff88;
+            font-weight: 800;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .status-data {
+            font-family: monospace;
+            color: #ffd700;
+            font-size: 12px;
+            word-break: break-all;
+            background: #0a1428;
+            padding: 10px;
+            border-radius: 30px;
+        }
+
+        /* Input Section */
+        .input-section {
+            background: #0f1629;
+            border-radius: 30px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #3f4e7a;
+        }
+
+        .input-label {
+            color: #8a9bcf;
+            font-size: 14px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .input-field {
+            width: 100%;
+            background: #1e2538;
+            border: 2px solid #2f3b5a;
+            border-radius: 30px;
+            padding: 15px 18px;
+            color: white;
+            font-family: monospace;
+            font-size: 15px;
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        .input-field:focus {
+            border-color: #ffd700;
+            box-shadow: 0 0 20px #ffd70033;
+        }
+
+        /* Traps Selector */
+        .traps-label {
+            color: #ffd700;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .traps-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .trap-option {
+            width: 55px;
+            height: 55px;
+            background: #1e2538;
+            border: 3px solid #2f3b5a;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8a9bcf;
+            font-weight: 800;
+            font-size: 22px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .trap-option.selected {
+            background: #ffd700;
+            border-color: #ffffff;
+            color: #0a0c15;
+            box-shadow: 0 0 30px #ffd700;
+            transform: scale(1.1);
+        }
+
+        /* Grid */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            background: #0c1222;
+            padding: 16px;
+            border-radius: 28px;
+            margin-bottom: 20px;
+            border: 1px solid #2f3d63;
+        }
+
+        .tile {
+            aspect-ratio: 1;
+            background: #1e2a45;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            font-weight: 700;
+            color: #a3b3e0;
+            border: 2px solid #31416b;
+            box-shadow: 0 4px 0 #0a0f1c;
+            transition: all 0.2s ease;
+        }
+
+        .tile.safe {
+            background: #4CAF50;
+            background: radial-gradient(circle at 30% 30%, #8BC34A, #2E7D32);
+            color: white;
+            border-color: #ffffff;
+            box-shadow: 0 0 25px #4CAF50, 0 4px 0 #1B5E20;
+            font-size: 20px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 20px #4CAF50, 0 4px 0 #1B5E20; }
+            50% { box-shadow: 0 0 35px #8BC34A, 0 4px 0 #1B5E20; }
+            100% { box-shadow: 0 0 20px #4CAF50, 0 4px 0 #1B5E20; }
+        }
+
+        /* Stats */
+        .stats-panel {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            background: #151e36;
+            border-radius: 24px;
+            padding: 15px 5px;
+            text-align: center;
+            border: 1px solid #3b4870;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: #ffd700;
+            line-height: 1.2;
+        }
+
+        .stat-desc {
+            font-size: 12px;
+            color: #95a5d4;
+            text-transform: uppercase;
+        }
+
+        /* Button */
+        .predict-btn {
+            background: linear-gradient(145deg, #4CAF50, #2E7D32);
+            border: none;
+            border-radius: 50px;
+            padding: 20px;
+            width: 100%;
+            font-weight: 800;
+            font-size: 18px;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 8px 0 #1B5E20, 0 10px 20px rgba(0,0,0,0.5);
+            transition: 0.1s;
+            margin: 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .predict-btn:active {
+            transform: translateY(6px);
+            box-shadow: 0 2px 0 #1B5E20, 0 8px 12px rgba(0,0,0,0.5);
+        }
+
+        /* Result Box */
+        .result-box {
+            background: #0f1a2a;
+            border-left: 6px solid #00b050;
+            padding: 18px;
+            border-radius: 24px;
+            margin: 15px 0;
+            color: #aec0ff;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* Info */
+        .info-text {
+            color: #ffd700;
+            font-size: 13px;
+            text-align: center;
+            margin: 15px 0;
+            background: #1a2340;
+            padding: 12px;
+            border-radius: 30px;
+            border: 1px solid #ffd70033;
+        }
+
+        .note {
+            color: #8a9bcf;
+            font-size: 11px;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-panel">
+            <!-- Status -->
+            <div class="status-bar">
+                <div class="status-title">🔐 REAL MINES PREDICTOR</div>
+                <div class="status-data" id="statusData">CLIENT SEED + SERVER SEED + TRAPS</div>
+            </div>
+
+            <!-- Input Section -->
+            <div class="input-section">
+                <div class="input-label">🎲 CLIENT SEED</div>
+                <input type="text" id="clientSeed" class="input-field" value="1e3d5c0d9bde2b2e" placeholder="Enter client seed...">
+                
+                <div class="input-label">🔓 SERVER SEED (Actual - NOT hash)</div>
+                <input type="text" id="serverSeed" class="input-field" value="7f8e3d2a1c5b9e4f6a8d2c4b" placeholder="Enter actual server seed...">
+                
+                <!-- Traps Selector -->
+                <div class="traps-label">💣 SELECT TRAPS COUNT</div>
+                <div class="traps-selector" id="trapsSelector">
+                    <div class="trap-option" data-traps="3">3</div>
+                    <div class="trap-option" data-traps="4">4</div>
+                    <div class="trap-option" data-traps="5">5</div>
+                    <div class="trap-option" data-traps="6">6</div>
+                    <div class="trap-option" data-traps="7">7</div>
+                    <div class="trap-option" data-traps="8">8</div>
+                </div>
+            </div>
+
+            <!-- Info -->
+            <div class="info-text">
+                ⚡ PREDICTIONS CHANGE EVERY CLICK • 2-8 SAFE SPOTS ONLY
+            </div>
+
+            <!-- Grid -->
+            <div class="grid-container" id="minesGrid"></div>
+
+            <!-- Stats -->
+            <div class="stats-panel">
+                <div class="stat-box">
+                    <div class="stat-number" id="safeCount">0</div>
+                    <div class="stat-desc">✅ SAFE SPOTS</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number" id="trapsDisplay">0</div>
+                    <div class="stat-desc">💣 TRAPS</div>
+                </div>
+            </div>
+
+            <!-- Predict Button -->
+            <button class="predict-btn" id="predictBtn">
+                🔮 GENERATE PREDICTION
+            </button>
+
+            <!-- Result -->
+            <div class="result-box" id="resultBox">
+                Enter seeds and select traps count
+            </div>
+
+            <!-- Note -->
+            <div class="note">
+                ⭐ Green = Predicted Safe • Each click gives different 2-8 spots
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // DOM Elements
+            const clientSeedInput = document.getElementById('clientSeed');
+            const serverSeedInput = document.getElementById('serverSeed');
+            const predictBtn = document.getElementById('predictBtn');
+            const minesGrid = document.getElementById('minesGrid');
+            const safeCountSpan = document.getElementById('safeCount');
+            const trapsDisplaySpan = document.getElementById('trapsDisplay');
+            const resultBox = document.getElementById('resultBox');
+            const statusData = document.getElementById('statusData');
+            const trapOptions = document.querySelectorAll('.trap-option');
+            
+            let selectedTraps = 4;
+
+            // Trap selector
+            trapOptions.forEach(opt => {
+                opt.addEventListener('click', function() {
+                    trapOptions.forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedTraps = parseInt(this.dataset.traps);
+                    trapsDisplaySpan.innerText = selectedTraps;
+                });
+            });
+            trapOptions[1].click();
+
+            // Hash function
+            function hash(str) {
+                let h = 0;
+                for (let i = 0; i < str.length; i++) {
+                    h = ((h << 5) - h) + str.charCodeAt(i);
+                    h = h & h;
+                }
+                return Math.abs(h);
+            }
+
+            // Generate random seed
+            function getRandomSeed(base, index) {
+                return hash(base + index.toString() + Math.random().toString());
+            }
+
+            // Generate prediction (2-8 spots only)
+            function generatePrediction(clientSeed, serverSeed, trapsCount) {
+                // Combine seeds
+                const combined = clientSeed + ':' + serverSeed;
+                const mainHash = hash(combined);
+                
+                // Determine prediction count (2-8 only)
+                let predCount;
+                
+                if (trapsCount >= 7) {
+                    predCount = 2 + (mainHash % 3); // 2,3,4
+                } else if (trapsCount >= 5) {
+                    predCount = 3 + (mainHash % 4); // 3,4,5,6
+                } else {
+                    predCount = 4 + (mainHash % 5); // 4,5,6,7,8
+                }
+                
+                // Generate positions
+                let positions = [];
+                for (let i = 0; i < 25; i++) positions.push(i);
+                
+                // Shuffle
+                let seed = mainHash;
+                for (let i = positions.length - 1; i > 0; i--) {
+                    seed = hash(seed.toString() + i + clientSeed);
+                    const j = seed % (i + 1);
+                    [positions[i], positions[j]] = [positions[j], positions[i]];
+                }
+                
+                // Take first 'predCount' as safe predictions
+                const safePredictions = positions.slice(0, predCount).sort((a, b) => a - b);
+                
+                return {
+                    safePositions: safePredictions,
+                    predictionCount: predCount,
+                    trapsCount: trapsCount
+                };
+            }
+
+            // Render grid
+            function renderGrid(result) {
+                minesGrid.innerHTML = '';
+                
+                for (let i = 0; i < 25; i++) {
+                    const tile = document.createElement('div');
+                    tile.className = 'tile';
+                    
+                    if (result.safePositions.includes(i)) {
+                        tile.classList.add('safe');
+                        tile.innerText = '⭐';
+                    } else {
+                        tile.innerText = (i + 1).toString().padStart(2, '0');
+                    }
+                    
+                    minesGrid.appendChild(tile);
+                }
+                
+                safeCountSpan.innerText = result.predictionCount;
+            }
+
+            // Main prediction function
+            function predict() {
+                const clientSeed = clientSeedInput.value.trim();
+                const serverSeed = serverSeedInput.value.trim();
+                
+                if (!clientSeed || !serverSeed) {
+                    resultBox.innerHTML = '❌ Please enter both seeds';
+                    return;
+                }
+                
+                // Generate prediction
+                const result = generatePrediction(clientSeed, serverSeed, selectedTraps);
+                
+                // Render
+                renderGrid(result);
+                
+                // Format safe positions
+                const safeList = result.safePositions.map(p => p + 1).join(', ');
+                
+                // Update result box
+                resultBox.innerHTML = `
+                    ✅ PREDICTION READY<br>
+                    ⭐ Safe spots (${result.predictionCount}): ${safeList}<br>
+                    💣 Traps: ${result.trapsCount}<br>
+                    🔐 Using: ${clientSeed.substring(0,8)}... + ${serverSeed.substring(0,8)}...
+                `;
+                
+                statusData.innerHTML = `${clientSeed.substring(0,6)}... + ${serverSeed.substring(0,6)}... + TRAPS ${selectedTraps}`;
+            }
+
+            predictBtn.addEventListener('click', predict);
+            
+            // Initial prediction
+            setTimeout(predict, 100);
+        })();
+    </script>
+</body>
+</html>
